@@ -104,7 +104,7 @@ function whiteTurn() {
         } else if (info[0] == "white") {
             document.getElementById(info[2]).addEventListener("click", go);
         }
-    });
+    }); 
 }
 
 //input 
