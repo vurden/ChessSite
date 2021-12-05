@@ -1,0 +1,83 @@
+body {
+    user-select: none;
+}
+
+.board div div {
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    display: inline-block;
+    margin: -2.5px;
+    text-align: center;
+    font-size: 50px;
+    vertical-align: top;
+}
+.board div {
+    z-index: -1;
+}
+#start {
+    position: absolute;
+    right: 25%;
+    width: 605px;
+    border: 3px solid cadetblue;
+    height: 592px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+}
+#start #next {
+    position: absolute;
+    top: 47.5%;
+    border: 2px solid white;
+    width: 300px;
+    text-align: center;
+    left: 25%;
+    background-color: cadetblue;
+    border-radius: 5px;
+    font-family: sans-serif;
+    height: 50px;
+    color: white;
+    font-size: 25px;
+}
+#start #next2 {
+    position: absolute;
+    top: 58%;
+    border: 2px solid white;
+    width: 250px;
+    text-align: center;
+    left: 29%;
+    background-color: cadetblue;
+    border-radius: 5px;
+    font-family: sans-serif;
+    height: 30px;
+    color: white;
+    font-size: 20px;
+}
+#next div {
+    position: absolute;
+    left: 28%;
+    top: 10px;
+}
+#next2 div {
+    position: absolute;
+    left: 33%;
+    top: 4px;
+}
+.board div div:hover {
+    background-color: rgb(111, 192, 165);
+}
+.grid-b {
+    background-color: lightslategrey;
+}
+.grid-w {
+    background-color: whitesmoke;
+}
+.board {
+    position: absolute;
+    right: 25%;
+    width: 605px;
+    border: 3px solid black;
+    padding: 10px;
+    z-index: -1;
+    border-radius: 10px;
+}
