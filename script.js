@@ -1,6 +1,7 @@
-var peice;
-var who = [];
-var who2 = [];
+var passSave;
+var pass;
+var global;
+var turn = "white";
 var tiles = [
     "a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1", 
     "a2", "b2", "c2", "d2", "e2", "f2", "g2", "h2", 
@@ -19,7 +20,7 @@ document.getElementById("next2").addEventListener("click", freeplay);
 function startGame() {
     document.getElementById("start").style.zIndex = -2;
     document.getElementById("start").style.visibility = "hidden";
-    whiteTurn();
+    startTurn();
 }
 
 //freeplay
@@ -31,59 +32,58 @@ function freeplay() {
     }
 }
 
-function go2() {
-    
-}
-
-//On peice click:
 function go(event) {
-    who2 = who;
-    who = [];
+    console.log("GOGOGOGOGOO")
+    global = event.target.id
+    pass;
+    passSave = pass;
     
     //change back to normal board colors:
     defaultColor();
     
     //get info of peice clicked (color, type, grid id):
     var info = details(event.target);
-    console.log(info);
-    
+
     //get grids peice can move to
     var x = whatFun(info[1]);
-    peices[x](info[2]);
-
+    console.log(x);
+    pass = peices[x](info[2]);
+    console.log(pass)
     
+    //removes event listeners for highlighted tiles
+    removeEvents(passSave)
+    addEvents(pass)
+
 }
 
-function pawn(color, place) {
-    peice = place;
-    //white
-    if (color == "white") {
-        console.log(tiles.indexOf(place));
-        var x = tiles.indexOf(place) + 8;
-        who.push(tiles[x]);
-        if (peice.substr(peice.length - 1) == "2") {
-            who.push(tiles[x]);
-        }
+function removeEvents(passSave) {
+    if (passSave != undefined) {
+        passSave.forEach(element => {
+            document.getElementById(element).removeEventListener("click", move);
+        }); 
     }
-    addEvents();
 }
-function addEvents() {
-    who2.forEach(element => {
-        document.getElementById(element).removeEventListener("click", move);
-    });
-    who.forEach(element => {
+
+function addEvents(pass) {
+    pass.forEach(element => {
         document.getElementById(element).style.backgroundColor = "#ffc933"
         document.getElementById(element).addEventListener("click", move);
     }); 
 }
 
 function move(event) {
-    console.log(`${peice} to ${event.target.id}`)
-    document.getElementById(peice).innerText = "";
-    document.getElementById(event.target.id).innerText = "♙";
-    who2.forEach(element => {
-        document.getElementById(element).removeEventListener("click", move);
-    });
+    document.getElementById(event.target.id).innerText = document.getElementById(global).innerText;
+    document.getElementById(global).innerText = "";
+    defaultColor();
+    removeEvents(pass)
+    removeStartTurn()
+    if (turn == "white") {
+        turn = "black";
+    } else if (turn == "black") {
+        turn = "white";
+    }
+    startTurn();
+    
 }
 
 function defaultColor() {
@@ -97,17 +97,29 @@ function defaultColor() {
     }
 }
 
-function whiteTurn() {
+function startTurn() {
+    console.log(turn)
     tiles.forEach(element => {
         var info = details(document.getElementById(element));
         if (info == undefined) {
-        } else if (info[0] == "white") {
+        } else if (info[0] == turn) {
             document.getElementById(info[2]).addEventListener("click", go);
         }
     });
 }
 
-//input 
+function removeStartTurn() {
+    tiles.forEach(element => {
+        var info = details(document.getElementById(element));
+        if (info == undefined) {
+        } else if (info[0] == turn) {
+            document.getElementById(info[2]).removeEventListener("click", go);
+        }
+    });
+    document.getElementById(global).removeEventListener("click", go);
+}
+
+//parameter: event.target
 function details(event) {
     var x = event.innerText;
     if (x == "♟" || x == "♜" || x =="♞" || x == "♝" || x == "♚" || x == "♛") {
@@ -155,18 +167,34 @@ const peices = [
     function pawnW(place) {
         var array = [];
         console.log("White Pawn");
-        var x = details(document.getElementById(tiles[tiles.indexOf(place) + 8]));
+        var x = another(place, 8);
         if (x[0] == "none") {
             array.push(x[2]);
-            x = details(document.getElementById(tiles[tiles.indexOf(place) + 8]));
-            if (x[0] == "none") {
+            x = another(place, 16);
+            //this is weird?
+            if (x[0] == "none" && ![9, 10, 11, 12, 13, 14, 15, 16].every((item) => {return item!=x[3]})) {
                 array.push(x[2]);   
             }
-            console.log(array);
         }
+        x = another(place, 9);
+        if (x[0] == "black" && [8, 16, 24, 32, 40, 48, 56, 64].every((item) => {return item!=x[3]})) {
+            array.push(x[2]);
+        }
+        x = another(place, 7);
+        if (x[0] == "black" && [1, 9, 17, 25, 33, 41, 49, 57].every((item) => {return item!=x[3]})) {
+            array.push(x[2]);
+        }
+        return array;
     },
-    function rookW() {
+    function rookW(place) {
         console.log("White Rook")
+        var current = place;
+        console.log(another(current, 8))
+        console.log(document.getElementById(another(current, 8).innerText))
+        while (false) {
+            if (document.getElementById(another(current, 8).innerText)) {}
+        }
+
     },
     function knightW() {
         console.log("White Knight")
@@ -178,8 +206,27 @@ const peices = [
         console.log("White Queen")
     },
     
-    function pawnB() {
+    function pawnB(place) {
         console.log("Black Pawn")
+        var array = [];
+        var x = another(place, -8);
+        if (x[0] == "none") {
+            array.push(x[2]);
+            x = another(place, -16);
+            //this is weird?
+            if (x[0] == "none" && ![49, 50, 51, 52, 53, 54, 55, 56].every((item) => {return item!=x[3]})) {
+                array.push(x[2]);   
+            }
+        }
+        x = another(place, -7);
+        if (x[0] == "white" && [8, 16, 24, 32, 40, 48, 56, 64].every((item) => {return item!=x[3]})) {
+            array.push(x[2]);
+        }
+        x = another(place, -9);
+        if (x[0] == "white" && [1, 9, 17, 25, 33, 41, 49, 57].every((item) => {return item!=x[3]})) {
+            array.push(x[2]);
+        }
+        return array;
     },function rookB() {
         console.log("Black Rook")
     },function knightB() {
@@ -196,10 +243,9 @@ const peices = [
 
 function diagonal(place, team) {}
 
-function available(x, color) {
-    if (x == undefined){
-        return "none";
-    } else if (x[0] == "white") {
-        return "white";
-    } else return "black";
+function another(place, x) {
+    var push = details(document.getElementById(tiles[tiles.indexOf(place) + x]));
+    push.push(tiles.indexOf(place));
+    push.push(tiles.indexOf(place) + x);
+    return push;
 }
