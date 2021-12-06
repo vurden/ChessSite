@@ -19,6 +19,7 @@ document.getElementById("next2").addEventListener("click", freeplay);
 //start game
 function startGame() {
     document.getElementById("start").style.zIndex = -2;
+    document.getElementById("vid").style.display = "block";
     document.getElementById("start").style.visibility = "hidden";
     startTurn();
 }
