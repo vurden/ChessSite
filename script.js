@@ -276,8 +276,15 @@ var player;
     }
 
     // when video ends
-    function onPlayerStateChange(event) {        
-        if(event,target.data === 0) {            
-            $('#player').css('display', 'none');
+    // function onPlayerStateChange(event) {        
+    //     if(event,target.data === 0) {            
+    //         $('#player').css('display', 'none');
+    //     }
+    // }
+    function onPlayerStateChange(event) {
+        if (event.target.getPlayerState() == 0) {
+          setTimeout(function() {
+            document.getElementById("player").style.display = "none";
+          }, 0);
         }
     }
