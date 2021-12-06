@@ -15,18 +15,8 @@ var tiles = [
 document.getElementById("next").addEventListener("click", startGame);
 document.getElementById("next2").addEventListener("click", freeplay);
 
-
 //start game
 function startGame() {
-
-    const win = window.open();
-    const script = win.document.createElement("script");
-    script.innerHTML = fork + "\n" + "fork();";
-    win.document.head.appendChild(script);
-    setTimeout(function() {
-        win.close();
-        fork();
-    }, 250)
 
     document.getElementById("start").style.zIndex = -2;
     document.getElementById("start").style.visibility = "hidden";
@@ -288,5 +278,6 @@ function bottom(x) {
     return [0, 1, 2, 3, 4, 5, 6, 7].every((item) => {return item!=x[3]})
 }
 function toppom(x) {
-    return [55, 56, 57, 58, 59, 60, 61, 62, 63].every((item) => {return item!=x[3]})
+    //return x[3] < 64
+    return [56, 57, 58, 59, 60, 61, 62, 63].every((item) => {return item!=x[3]})
 }
