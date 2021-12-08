@@ -203,11 +203,28 @@ const peices = [
         console.log("White Knight")
     },function bishopW(place) {
         console.log("White Bishop")
+        var array = [];
+        array = north(place, 9, array)
+        array = north(place, 7, array)
+        array = north(place, -7, array)
+        array = north(place, -9, array)
+        return array;
     },function kingW(place) {
         console.log("White King")
     },function queenW(place) {
         console.log("White Queen")
+        var array = [];
+        array = north(place, 9, array)
+        array = north(place, 7, array)
+        array = north(place, -7, array)
+        array = north(place, -9, array)
+        array = north(place, 8, array)
+        array = north(place, -8, array)
+        array = north(place, -1, array)
+        array = north(place, 1, array)
+        return array;
     },
+
     
     function pawnB(place) {
         console.log("Black Pawn")
@@ -243,10 +260,26 @@ const peices = [
         console.log("Black Knight")
     },function bishopB(place) {
         console.log("Black Bishop")
+        var array = [];
+        array = north(place, 9, array)
+        array = north(place, 7, array)
+        array = north(place, -7, array)
+        array = north(place, -9, array)
+        return array;
     },function kingB(place) {
         console.log("Black King")
     },function queenB(place) {
         console.log("Black Queen")
+        var array = [];
+        array = north(place, 9, array)
+        array = north(place, 7, array)
+        array = north(place, -7, array)
+        array = north(place, -9, array)
+        array = north(place, 8, array)
+        array = north(place, -8, array)
+        array = north(place, -1, array)
+        array = north(place, 1, array)
+        return array;
     },
 
 ]
