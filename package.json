@@ -1,0 +1,23 @@
+{
+  "name": "chesssite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "start": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vurden/ChessSite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vurden/ChessSite/issues"
+  },
+  "homepage": "https://github.com/vurden/ChessSite#readme",
+  "dependencies": {
+    "vite": "^2.7.1"
+  }
+}
