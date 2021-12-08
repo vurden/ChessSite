@@ -1,3 +1,4 @@
+//npm start
 var passSave;
 var pass;
 var global;
@@ -193,14 +194,19 @@ const peices = [
         array = north(place, 1, array)
         array = north(place, -1, array)
         return array;
-        
-        
-        //document.getElementById(tiles[another(current, 8)[4]])
-        
-
     },
     function knightW(place) {
         console.log("White Knight")
+        var array = [];
+        array = north(place, 6, array, true)
+        array = north(place, 10, array, true)
+        array = north(place, 15, array, true)
+        array = north(place, 17, array, true)
+        array = north(place, -6, array, true)
+        array = north(place, -10, array, true)
+        array = north(place, -15, array, true)
+        array = north(place, -17, array, true)
+        return array;
     },function bishopW(place) {
         console.log("White Bishop")
         var array = [];
@@ -211,6 +217,16 @@ const peices = [
         return array;
     },function kingW(place) {
         console.log("White King")
+        var array = [];
+        array = north(place, 9, array, true)
+        array = north(place, 7, array, true)
+        array = north(place, -7, array, true)
+        array = north(place, -9, array, true)
+        array = north(place, 8, array, true)
+        array = north(place, -8, array, true)
+        array = north(place, -1, array, true)
+        array = north(place, 1, array, true)
+        return array;
     },function queenW(place) {
         console.log("White Queen")
         var array = [];
@@ -258,6 +274,16 @@ const peices = [
         
     },function knightB(place) {
         console.log("Black Knight")
+        var array = [];
+        array = north(place, 6, array, true)
+        array = north(place, 10, array, true)
+        array = north(place, 15, array, true)
+        array = north(place, 17, array, true)
+        array = north(place, -6, array, true)
+        array = north(place, -10, array, true)
+        array = north(place, -15, array, true)
+        array = north(place, -17, array, true)
+        return array;
     },function bishopB(place) {
         console.log("Black Bishop")
         var array = [];
@@ -268,6 +294,16 @@ const peices = [
         return array;
     },function kingB(place) {
         console.log("Black King")
+        var array = [];
+        array = north(place, 9, array, true)
+        array = north(place, 7, array, true)
+        array = north(place, -7, array, true)
+        array = north(place, -9, array, true)
+        array = north(place, 8, array, true)
+        array = north(place, -8, array, true)
+        array = north(place, -1, array, true)
+        array = north(place, 1, array, true)
+        return array;
     },function queenB(place) {
         console.log("Black Queen")
         var array = [];
@@ -284,9 +320,8 @@ const peices = [
 
 ]
 
-function north(place, move, array) {
+function north(place, move, array, king) {
     var current = place;  
-    
     while (true) {
         if (another(current, move)[0] == "none") {
             var x = another(current, move);
@@ -298,6 +333,7 @@ function north(place, move, array) {
             array.push(x[2]);
             break;
         } else break;
+        if (king == true) {break;}
     }
     return array;
 
@@ -308,12 +344,20 @@ function another(place, x) {
         return ["na"];
     } else if (tiles.indexOf(place) + x < 0) {
         return ["na"];
-    } else if (x == 9 || x == -7 || x == 1) {
+    } else if (x == 9 || x == -7 || x == 1 || x == 17 || x == -15) {
         if (right(tiles.indexOf(place))) {
             return ["na"];
         }
-    } else if (x == 7 || x == -9 || x == -1) {
+    } else if (x == 7 || x == -9 || x == -1 || x == 15 || x == -17) {
         if (left(tiles.indexOf(place))) {
+            return ["na"];
+        }
+    } else if (x == 10 || x == -6) {
+        if (right2x(tiles.indexOf(place))) {
+            return ["na"];
+        }
+    } else if (x == 6 || x == -10) {
+        if (left2x(tiles.indexOf(place))) {
             return ["na"];
         }
     }
@@ -329,11 +373,9 @@ function left(x) {
 function right(x) {
     return ![7, 15, 23, 31, 39, 47, 55, 63].every((item) => {return item!=x})
 }
-function bottom(x) {
-    return [0, 1, 2, 3, 4, 5, 6, 7].every((item) => {return item!=x[3]})
+function left2x(x) {
+    return ![0, 1, 8, 9, 16, 17, 24, 25, 32, 33, 40, 41, 48, 49, 56, 57].every((item) => {return item!=x})
 }
-function toppom(x) {
-    //return x[3] < 64
-    //return [56, 57, 58, 59, 60, 61, 62, 63].every((item) => {return item!=x[3]})
-    if (x => 56) {return false}
+function right2x(x) {
+    return ![6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55, 62, 63].every((item) => {return item!=x})
 }
