@@ -1,4 +1,5 @@
 //npm start
+
 var passSave;
 var pass;
 var global;
@@ -16,6 +17,8 @@ var tiles = [
 ]
 document.getElementById("next").addEventListener("click", startGame);
 document.getElementById("next2").addEventListener("click", freeplay);
+
+
 
 //start game
 function startGame() {
@@ -378,4 +381,76 @@ function left2x(x) {
 }
 function right2x(x) {
     return ![6, 7, 14, 15, 22, 23, 30, 31, 38, 39, 46, 47, 54, 55, 62, 63].every((item) => {return item!=x})
+}
+
+var minSec = [15, 00];
+var timer = 0;
+document.getElementById("change").addEventListener("click", time);
+function time() {
+    if (timer == 0) {
+        document.getElementById("bclock").innerText = "Black 15:00";
+        document.getElementById("wclock").innerText = "White 15:00";
+        timer++;
+        minSec[0] = 15;
+        minSec[1] = 00;
+    } else if (timer == 1) {
+        document.getElementById("bclock").innerText = "Black 30:00";
+        document.getElementById("wclock").innerText = "White 30:00";
+        timer++;
+        minSec[0] = 30;
+        minSec[1] = 00;
+    } else if (timer == 2) {
+        document.getElementById("bclock").innerText = "Black 45:00";
+        document.getElementById("wclock").innerText = "White 45:00";
+        timer++;
+        minSec[0] = 45;
+        minSec[1] = 00;
+    } else if (timer == 3) {
+        document.getElementById("bclock").innerText = "Black 60:00";
+        document.getElementById("wclock").innerText = "White 60:00";
+        timer++;
+        minSec[0] = 60;
+        minSec[1] = 00;
+    } else if (timer == 4) {
+        document.getElementById("bclock").innerText = "Black 90:00";
+        document.getElementById("wclock").innerText = "White 90:00";
+        timer = 0;
+        minSec[0] = 90;
+        minSec[1] = 00;
+    }
+}
+
+document.getElementById("timer").addEventListener("click", timeStart);
+function timeStart() {
+    var wmin = minSec[0];
+    var wsec = minSec[1];
+    var bmin = minSec[0];
+    var bsec = minSec[1];
+    var int = setInterval(function() {
+        if (turn == "white") {
+            document.getElementById("wclock").innerHTML = "&nbsp&nbspWhite&nbsp&nbsp " + wmin + ":" + wsec;
+            if (wsec == 0) {
+                wmin --;
+                wsec = 60;
+                if (wmin == -1) {
+                    document.getElementById("end").style.zIndex = 2;
+                    document.getElementById("endb").style.visibility = "visible";
+                    clearInterval(int);
+                } 
+            }
+            wsec--;
+        } else {
+            document.getElementById("bclock").innerHTML = "&nbsp&nbspBlack&nbsp&nbsp " + bmin + ":" + bsec;
+            if (bsec == 0) {
+                bmin --;
+                bsec = 60;
+                if (bmin == -1) {
+                    document.getElementById("endw").style.visibility= "visible";
+                    document.getElementById("end").style.zIndex = 2;
+                    clearInterval(int);
+                } 
+            }
+            bsec--;
+        }
+    }, 1000);
 }
