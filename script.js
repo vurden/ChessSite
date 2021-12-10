@@ -86,7 +86,9 @@ function move(event) {
         turn = "white";
         opposite = "black";
     }
+    convert();
     startTurn();
+
     
 }
 
@@ -460,20 +462,35 @@ function timeStart() {
     }, 1000);
 }
 document.getElementById("timers").addEventListener("click", timeStop);
-    function timeStop() {
-        change = false;
-        document.getElementById("pause").style.visibility = "visible";
-        document.getElementById("end").style.zIndex = 2;
-        document.getElementById("timers").style.zIndex = -1;
-        document.getElementById("timer").style.zIndex = 1;
-        document.getElementById("timer").removeEventListener("click", timeStart);
-        document.getElementById("timer").addEventListener("click", () => {
-            change = true;
-            document.getElementById("pause").style.visibility = "hidden";
-            document.getElementById("end").style.zIndex = -2;
-            document.getElementById("timers").style.zIndex = 1;
-            document.getElementById("timer").style.zIndex = -1;
-            document.getElementById("pause").style.zIndex = 2;
+function timeStop() {
+    change = false;
+    document.getElementById("pause").style.visibility = "visible";
+    document.getElementById("end").style.zIndex = 2;
+    document.getElementById("timers").style.zIndex = -1;
+    document.getElementById("timer").style.zIndex = 1;
+    document.getElementById("timer").removeEventListener("click", timeStart);
+    document.getElementById("timer").addEventListener("click", () => {
+        change = true;
+        document.getElementById("pause").style.visibility = "hidden";
+        document.getElementById("end").style.zIndex = -2;
+        document.getElementById("timers").style.zIndex = 1;
+        document.getElementById("timer").style.zIndex = -1;
+        document.getElementById("pause").style.zIndex = 2;
 
-        })
+    })
+}
+
+function convert() {
+    var topArray = ["a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8"]
+    for (var x = 0; x < 8; x++) {
+        if (document.getElementById(topArray[x]).innerText == "♙") {
+            document.getElementById(topArray[x]).innerText = "♕"
+        }
     }
+    var bottomArray = ["a1", "b1", "c1", "d1", "e1", "f1", "g1", "h1"]
+    for (var x = 0; x < 8; x++) {
+        if (document.getElementById(bottomArray[x]).innerText == "♟") {
+            document.getElementById(bottomArray[x]).innerText = "♛"
+        }
+    }
+}

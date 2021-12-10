@@ -17,7 +17,7 @@ body {
 }
 #start {
     position: absolute;
-    right: 25%;
+    right: 30%;
     width: 605px;
     border: 3px solid black;
     height: 575.5px;
@@ -74,7 +74,7 @@ body {
 }
 .board {
     position: absolute;
-    right: 25%;
+    right: 30%;
     width: 605px;
     border: 3px solid black;
     padding: 10px;
@@ -85,7 +85,7 @@ body {
 }
 #timer {
     position: absolute;
-    left: 23%;
+    left: 71%;
     width: 100px;
     height: 50px;
     text-align: center;
@@ -95,10 +95,11 @@ body {
     font-size: 22px;
     background-color: cadetblue;
     z-index: 1;
+    top: 32%;
 }
 #timers {
     position: absolute;
-    left: 23%;
+    left: 71%;
     width: 100px;
     height: 50px;
     text-align: center;
@@ -108,10 +109,11 @@ body {
     font-size: 22px;
     background-color: cadetblue;
     z-index: -1;
+    top: 32%;
 }
 #bclock {
     position: absolute;
-    left: 76%;
+    left: 71%;
     width: 100px;
     height: 50px;
     text-align: center;
@@ -123,7 +125,7 @@ body {
 }
 #wclock {
     position: absolute;
-    left: 76%;
+    left: 71%;
     width: 100px;
     height: 50px;
     text-align: center;
@@ -135,7 +137,7 @@ body {
 }
 #change {
     position: absolute;
-    left: 23%;
+    left: 71%;
     width: 100px;
     height: 50px;
     text-align: center;
@@ -144,11 +146,11 @@ body {
     font-family: sans-serif;
     font-size: 22px;
     background-color: cadetblue;
-    top: 10%;
+    top: 41%;
 }
 #end {
     position: absolute;
-    right: 25%;
+    right: 30%;
     width: 605px;
     border: 3px solid black;
     height: 575.5px;
