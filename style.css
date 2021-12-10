@@ -94,6 +94,20 @@ body {
     font-family: sans-serif;
     font-size: 22px;
     background-color: cadetblue;
+    z-index: 1;
+}
+#timers {
+    position: absolute;
+    left: 23%;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    border: 3px solid black;
+    border-radius: 6px;
+    font-family: sans-serif;
+    font-size: 22px;
+    background-color: cadetblue;
+    z-index: -1;
 }
 #bclock {
     position: absolute;
@@ -160,5 +174,14 @@ body {
     font-size: 50px;
     font-family: sans-serif;
     left: 29%;
+    visibility: hidden;
+}
+#pause {
+    position: absolute;
+    top: 43%;
+    color: white;
+    font-size: 50px;
+    font-family: sans-serif;
+    left: 25%;
     visibility: hidden;
 }
