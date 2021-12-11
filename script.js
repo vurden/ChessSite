@@ -1,5 +1,4 @@
 //npm start
-
 var passSave;
 var pass;
 var global;
@@ -493,4 +492,23 @@ function convert() {
             document.getElementById(bottomArray[x]).innerText = "♛"
         }
     }
+}
+
+//colors:
+document.getElementById("color1").addEventListener("click", changeColor);
+document.getElementById("color2").addEventListener("click", changeColor);
+document.getElementById("color3").addEventListener("click", changeColor);
+document.getElementById("color4").addEventListener("click", changeColor);
+
+function changeColor(event) {
+    x = document.querySelector("body");
+    if (event.target.id == "color1") {
+            x.style.setProperty('--color2', "lightslategrey")
+    } else if (event.target.id == "color2") {
+            x.style.setProperty('--color2', "peru")
+    } else if (event.target.id == "color3") {
+            x.style.setProperty('--color2', "pink")
+    } else if (event.target.id == "color4") {
+            x.style.setProperty('--color2', "brown")
+    } 
 }
