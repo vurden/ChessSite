@@ -1,4 +1,6 @@
 //npm start
+var colorFor = "lightslategrey";
+var undo = [];
 var passSave;
 var pass;
 var global;
@@ -14,6 +16,7 @@ var tiles = [
     "a7", "b7", "c7", "d7", "e7", "f7", "g7", "h7",
     "a8", "b8", "c8", "d8", "e8", "f8", "g8", "h8",
 ]
+undoFunc();
 document.getElementById("next").addEventListener("click", startGame);
 document.getElementById("next2").addEventListener("click", freeplay);
 
@@ -86,6 +89,7 @@ function move(event) {
         opposite = "black";
     }
     convert();
+    undoFunc();
     startTurn();
 
     
@@ -94,7 +98,7 @@ function move(event) {
 function defaultColor() {
     var allB = document.getElementsByClassName('grid-b');
     for (var i = 0; i < allB.length; i++) {
-        allB[i].style.backgroundColor = 'lightslategrey';
+        allB[i].style.backgroundColor = colorFor;
     }
     var allW = document.getElementsByClassName('grid-w');
     for (var i = 0; i < allW.length; i++) {
@@ -499,16 +503,84 @@ document.getElementById("color1").addEventListener("click", changeColor);
 document.getElementById("color2").addEventListener("click", changeColor);
 document.getElementById("color3").addEventListener("click", changeColor);
 document.getElementById("color4").addEventListener("click", changeColor);
-
 function changeColor(event) {
     x = document.querySelector("body");
     if (event.target.id == "color1") {
             x.style.setProperty('--color2', "lightslategrey")
+            colorFor = "lightslategrey";
     } else if (event.target.id == "color2") {
             x.style.setProperty('--color2', "peru")
+            colorFor = "peru";
     } else if (event.target.id == "color3") {
             x.style.setProperty('--color2', "pink")
+            colorFor = "pink";
     } else if (event.target.id == "color4") {
             x.style.setProperty('--color2', "brown")
-    } 
+            colorFor = "brown";
+    }
+    defaultColor();
+}
+
+function undoFunc() {
+    var array = [];
+    for (var i = 0; i < 64; i++) {
+        array.push(document.getElementById(tiles[i]).innerText);
+    }
+    undo.push(array);
+}
+
+document.getElementById("buttonUndo").addEventListener("click", undoButton);
+document.getElementById("buttonRedo").addEventListener("click", undoButton);
+
+var undoTimes = 0
+function undoButton(event) {
+    if (undo.length != 1) {
+        
+        if (event.target.id == "buttonUndo") {
+            if (undoTimes * -1 + 2 <= undo.length) {
+                removeStartTurn();
+                if (turn == "white") {
+                    turn = "black";
+                    opposite = "white";
+                } else if (turn == "black") {
+                    turn = "white";
+                    opposite = "black";
+                }
+                undoTimes--;
+                x = undo.length -1 + undoTimes;
+                y = undo[x]
+                for (var i = 0; i < 64; i++) {
+                    document.getElementById(tiles[i]).innerText = y[i];
+                }
+                console.log(event.target.id);
+                startTurn();
+            }
+        } else {
+            if (undoTimes < 0) {
+                removeStartTurn();
+                if (turn == "white") {
+                    turn = "black";
+                    opposite = "white";
+                } else if (turn == "black") {
+                    turn = "white";
+                    opposite = "black";
+                }
+                undoTimes++;
+                x = undo.length -1 + undoTimes;
+                y = undo[x]
+                for (var i = 0; i < 64; i++) {
+                    document.getElementById(tiles[i]).innerText = y[i];
+                }
+                console.log(event.target.id);
+                startTurn();
+            }
+        }
+        
+    }
+    
+
+}
+
+function redoButton() {
+
 }
