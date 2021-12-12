@@ -65,9 +65,7 @@ body {
     left: 33%;
     top: 4px;
 }
-.board div div:hover {
-    background-color: rgb(111, 192, 165);
-}
+
 .grid-b {
     background-color: var(--color2);
 }

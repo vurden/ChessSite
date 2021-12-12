@@ -20,6 +20,18 @@ undoFunc();
 document.getElementById("next").addEventListener("click", startGame);
 document.getElementById("next2").addEventListener("click", freeplay);
 
+var backUp;
+for (var i = 0; i < 64; i++) {
+    document.getElementById(tiles[i]).addEventListener("pointerenter", (event) => {
+        var backUp = document.getElementById(event.target.id).style.backgroundColor;
+        document.getElementById(event.target.id).addEventListener("pointerleave", (event) => {
+            document.getElementById(event.target.id).style.backgroundColor = backUp;
+        })
+        document.getElementById(event.target.id).style.backgroundColor = "rgb(111, 192, 165)"
+    })
+    
+}
+
 
 
 //start game
@@ -34,9 +46,50 @@ function startGame() {
 function freeplay() {
     document.getElementById("start").style.zIndex = -2;
     document.getElementById("start").style.visibility = "hidden";
-    for (var i = 0; i <= 63; i++) {
-        document.getElementById(tiles[i]).addEventListener("click", go2);
+    startTurn("freeplay");
+    
+}
+var xJoe;
+function go2(event) {
+    xJoe = document.getElementById(event.target.id);
+    document.getElementById(event.target.id).style.backgroundColor = "#ffc933"
+    tiles.forEach(element => {
+        var info = details(document.getElementById(element));
+        if (info[0] != turn) {
+            document.getElementById(element).addEventListener("click", okFine)
+        }
+    });
+}
+
+function okFine(event) {
+    remake();
+    tiles.forEach(element => {
+        var info = details(document.getElementById(element));
+        if (info == undefined) {
+        } else if (info[0] == turn) {
+            document.getElementById(info[2]).removeEventListener("click", go2);
+        }
+    });
+    document.getElementById(event.target.id).innerText = xJoe.innerText;
+    xJoe.innerText = ""
+    if (turn == "white") {
+        turn = "black";
+        opposite = "white";
+    } else if (turn == "black") {
+        turn = "white";
+        opposite = "black";
     }
+    startTurn("freeplay");
+
+}
+
+function remake() {
+    tiles.forEach(element => {
+        var info = details(document.getElementById(element));
+        if (info[0] != turn) {
+            document.getElementById(element).removeEventListener("click", okFine)
+        }
+    });
 }
 
 function go(event) {
@@ -76,6 +129,14 @@ function addEvents(pass) {
 }
 
 function move(event) {
+    if (document.getElementById(event.target.id).innerText == "♚") {
+        document.getElementById("endw").style.visibility= "visible";
+        document.getElementById("end").style.zIndex = 2;
+    }
+    if (document.getElementById(event.target.id).innerText == "♔") {
+        document.getElementById("endb").style.visibility= "visible";
+        document.getElementById("end").style.zIndex = 2;
+    }
     document.getElementById(event.target.id).innerText = document.getElementById(global).innerText;
     document.getElementById(global).innerText = "";
     defaultColor();
@@ -106,14 +167,24 @@ function defaultColor() {
     }
 }
 
-function startTurn() {
-    tiles.forEach(element => {
-        var info = details(document.getElementById(element));
-        if (info == undefined) {
-        } else if (info[0] == turn) {
-            document.getElementById(info[2]).addEventListener("click", go);
-        }
-    });
+function startTurn(x) {
+    if (x == "freeplay") {
+        tiles.forEach(element => {
+            var info = details(document.getElementById(element));
+            if (info == undefined) {
+            } else if (info[0] == turn) {
+                document.getElementById(info[2]).addEventListener("click", go2);
+            }
+        });
+    } else {
+        tiles.forEach(element => {
+            var info = details(document.getElementById(element));
+            if (info == undefined) {
+            } else if (info[0] == turn) {
+                document.getElementById(info[2]).addEventListener("click", go);
+            }
+        });
+    }
 }
 
 function removeStartTurn() {
@@ -538,6 +609,9 @@ function undoButton(event) {
         
         if (event.target.id == "buttonUndo") {
             if (undoTimes * -1 + 2 <= undo.length) {
+                document.getElementById("endb").style.visibility= "hidden";
+                document.getElementById("endb").style.visibility= "hidden";
+                document.getElementById("end").style.zIndex = -2;
                 removeStartTurn();
                 if (turn == "white") {
                     turn = "black";
@@ -552,7 +626,7 @@ function undoButton(event) {
                 for (var i = 0; i < 64; i++) {
                     document.getElementById(tiles[i]).innerText = y[i];
                 }
-                console.log(event.target.id);
+                defaultColor();
                 startTurn();
             }
         } else {
@@ -571,16 +645,12 @@ function undoButton(event) {
                 for (var i = 0; i < 64; i++) {
                     document.getElementById(tiles[i]).innerText = y[i];
                 }
-                console.log(event.target.id);
+                defaultColor();
                 startTurn();
             }
         }
         
     }
     
-
-}
-
-function redoButton() {
 
 }
