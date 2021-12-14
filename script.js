@@ -406,7 +406,6 @@ function north(place, move, array, king) {
             var x = another(current, move);
             array.push(x[2]);
             current = x[2]
-            if (tiles.indexOf(current) > 56) {break;}
         } else if (another(current, move)[0] == opposite) {
             var x = another(current, move);
             array.push(x[2]);
