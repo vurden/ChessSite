@@ -1,3 +1,3 @@
 # ChessSite
 
-This is my first HTML/CSS/JS project.
+Chess game made with HTML, CSS, and Javascript.
