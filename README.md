@@ -1,3 +1,5 @@
 # ChessSite
 
-Chess game made with HTML, CSS, and Javascript.
+My first HTML, CSS, and Javascript Project.
+
+A browser Chess game written in standard HTML, CSS, and JS.
