@@ -1,7 +1,5 @@
-# ChessSite
+# Matthew's website
 
-My first HTML, CSS, and Javascript Project.
+A single-file personal homepage hosted on Cloudflare Pages.
 
-A browser Chess game written in standard HTML, CSS, and JS.
-
-Try it out: https://chesssite.pages.dev/
+The original chess game is preserved at https://a917593f.chesssite.pages.dev.

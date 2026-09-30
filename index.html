@@ -1,119 +1,296 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Play Chess</title>
-        <meta charset="UTF-8">
-        <link href="./style.css" rel="stylesheet">
-        <script src="./script.js" defer></script>
-    </head>
-    
-    <body id="everything">
-        <div id="undo">
-            <div id="buttonUndo">&lt</div>
-            <div id="buttonRedo">&gt</div>
-        </div>
-        <div id="colors">
-            <div id="color1"></div>
-            <div id="color2"></div>
-            <div id="color3"></div>
-            <div id="color4"></div>
-        </div>
-        <div id="end">
-            <div id="endw">White Wins</div>
-            <div id="endb">Black Wins</div>
-            <div id="pause">Game Paused</div>
-        </div>
-        <div id="start">
-            <div id="next"><div>Start Game</div></div>
-            <div id="next2"><div>Free Play</div></div>
-        </div>
-        <div class="board">
-            <div>
-                <div class="grid-w" id="a8">&#9820</div>
-                <div class="grid-b" id="b8">&#9822</div>
-                <div class="grid-w" id="c8">&#9821</div>
-                <div class="grid-b" id="d8">&#9819</div>
-                <div class="grid-w" id="e8">&#9818</div>
-                <div class="grid-b" id="f8">&#9821</div>
-                <div class="grid-w" id="g8">&#9822</div>
-                <div class="grid-b" id="h8">&#9820</div>
-            </div>
-            <div>
-                <div class="grid-b" id="a7">&#9823</div>
-                <div class="grid-w" id="b7">&#9823</div>
-                <div class="grid-b" id="c7">&#9823</div>
-                <div class="grid-w" id="d7">&#9823</div>
-                <div class="grid-b" id="e7">&#9823</div>
-                <div class="grid-w" id="f7">&#9823</div>
-                <div class="grid-b" id="g7">&#9823</div>
-                <div class="grid-w" id="h7">&#9823</div>
-            </div>
-            <div>
-                <div class="grid-w" id="a6"></div>
-                <div class="grid-b" id="b6"></div>
-                <div class="grid-w" id="c6"></div>
-                <div class="grid-b" id="d6"></div>
-                <div class="grid-w" id="e6"></div>
-                <div class="grid-b" id="f6"></div>
-                <div class="grid-w" id="g6"></div>
-                <div class="grid-b" id="h6"></div>
-            </div>
-            <div>
-                <div class="grid-b" id="a5"></div>
-                <div class="grid-w" id="b5"></div>
-                <div class="grid-b" id="c5"></div>
-                <div class="grid-w" id="d5"></div>
-                <div class="grid-b" id="e5"></div>
-                <div class="grid-w" id="f5"></div>
-                <div class="grid-b" id="g5"></div>
-                <div class="grid-w" id="h5"></div>
-            </div>
-            <div>
-                <div class="grid-w" id="a4"></div>
-                <div class="grid-b" id="b4"></div>
-                <div class="grid-w" id="c4"></div>
-                <div class="grid-b" id="d4"></div>
-                <div class="grid-w" id="e4"></div>
-                <div class="grid-b" id="f4"></div>
-                <div class="grid-w" id="g4"></div>
-                <div class="grid-b" id="h4"></div>
-            </div>
-            <div>
-                <div class="grid-b" id="a3"></div>
-                <div class="grid-w" id="b3"></div>
-                <div class="grid-b" id="c3"></div>
-                <div class="grid-w" id="d3"></div>
-                <div class="grid-b" id="e3"></div>
-                <div class="grid-w" id="f3"></div>
-                <div class="grid-b" id="g3"></div>
-                <div class="grid-w" id="h3"></div>
-            </div>
-            <div>
-                <div class="grid-w" id="a2">&#9817</div>
-                <div class="grid-b" id="b2">&#9817</div>
-                <div class="grid-w" id="c2">&#9817</div>
-                <div class="grid-b" id="d2">&#9817</div>
-                <div class="grid-w" id="e2">&#9817</div>
-                <div class="grid-b" id="f2">&#9817</div>
-                <div class="grid-w" id="g2">&#9817</div>
-                <div class="grid-b" id="h2">&#9817</div>
-            </div>
-            <div>
-                <div class="grid-b" id="a1">&#9814</div>
-                <div class="grid-w" id="b1">&#9816</div>
-                <div class="grid-b" id="c1">&#9815</div>
-                <div class="grid-w" id="d1">&#9812</div>
-                <div class="grid-b" id="e1">&#9813</div>
-                <div class="grid-w" id="f1">&#9815</div>
-                <div class="grid-b" id="g1">&#9816</div>
-                <div class="grid-w" id="h1">&#9814</div>
-            </div>
-        </div>
-        <div id="timer">Start Timer</div>
-        <div id="timers">Pause Timer</div>
-        <div id="change">Change Time</div>
-        <div id="bclock">Black 15:00</div>
-        <div id="wclock">White 15:00</div>
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Matthew's personal corner of the web.">
+  <title>Matthew's Homepage</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #10141c;
+      --frame: #252b35;
+      --panel: #1b2029;
+      --panel-alt: #222936;
+      --bar: #394a66;
+      --bar-top: #536b91;
+      --border: #66758a;
+      --border-dark: #080b10;
+      --text: #d8dde6;
+      --muted: #9da9b9;
+      --link: #9dc4ff;
+      --accent: #f1b84b;
+    }
 
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --page: #d4d9df;
+      --frame: #eef0f3;
+      --panel: #f7f8fa;
+      --panel-alt: #e5e9ee;
+      --bar: #6f86a8;
+      --bar-top: #94a8c4;
+      --border: #8d99a8;
+      --border-dark: #38465a;
+      --text: #202733;
+      --muted: #596576;
+      --link: #174f9b;
+      --accent: #8a5200;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--page) repeating-linear-gradient(135deg, transparent 0 7px, rgba(255,255,255,.025) 7px 8px);
+      font: 12px/1.45 Verdana, Arial, sans-serif;
+    }
+
+    .site {
+      width: min(920px, calc(100% - 16px));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 10px;
+      border-inline: 1px solid var(--border-dark);
+      background: var(--frame);
+      box-shadow: 0 0 20px #0008;
+    }
+
+    .masthead {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 104px;
+      padding: 18px 22px;
+      border: 1px solid var(--border-dark);
+      background: linear-gradient(135deg, var(--bar-top), #263750 60%, #1b2535);
+      box-shadow: inset 1px 1px 0 #ffffff55, inset -1px -1px 0 #0008;
+    }
+
+    .logo {
+      color: white;
+      font: bold 32px/1 Georgia, serif;
+      letter-spacing: -1px;
+      text-shadow: 2px 2px 0 #152033;
+    }
+
+    .tagline { margin-top: 7px; color: #d6e1ef; }
+    .account { text-align: right; color: #e9eef6; }
+
+    button {
+      margin-top: 8px;
+      padding: 3px 8px;
+      border: 2px outset #c8d0dc;
+      color: #111820;
+      background: #d5dbe3;
+      font: bold 11px Verdana, Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    button:active { border-style: inset; }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 6px 0;
+      border: 1px solid var(--border-dark);
+      background: linear-gradient(var(--bar-top), var(--bar));
+      box-shadow: inset 1px 1px 0 #ffffff44;
+    }
+
+    .nav a {
+      padding: 8px 16px;
+      border-right: 1px solid var(--border-dark);
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 1px 1px #182233;
+    }
+
+    .nav a:hover, .nav a:focus-visible { background: #ffffff1f; }
+
+    .crumbs {
+      margin-bottom: 6px;
+      padding: 6px 9px;
+      border: 1px solid var(--border-dark);
+      background: var(--panel-alt);
+      color: var(--muted);
+    }
+
+    .forum {
+      border: 1px solid var(--border-dark);
+      background: var(--panel);
+    }
+
+    .forum-title, .panel-title {
+      padding: 6px 9px;
+      border-bottom: 1px solid var(--border-dark);
+      color: white;
+      background: linear-gradient(var(--bar-top), var(--bar));
+      font-weight: bold;
+      text-shadow: 1px 1px #182233;
+    }
+
+    .topic-title {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--panel-alt);
+      font-size: 11px;
+    }
+
+    .post {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      min-height: 285px;
+    }
+
+    .profile {
+      padding: 16px;
+      border-right: 1px solid var(--border);
+      background: var(--panel-alt);
+    }
+
+    .profile strong { display: block; color: var(--accent); font-size: 15px; }
+    .rank { display: block; margin: 2px 0 12px; color: var(--muted); font-size: 10px; }
+
+    .avatar {
+      display: grid;
+      width: 88px;
+      height: 88px;
+      place-items: center;
+      margin-bottom: 12px;
+      border: 3px double var(--border);
+      color: white;
+      background: linear-gradient(135deg, #596f92, #27364e);
+      font: bold 44px Georgia, serif;
+    }
+
+    dl { margin: 0; color: var(--muted); font-size: 10px; }
+    dt { float: left; clear: left; margin-right: 4px; font-weight: bold; }
+    dd { margin: 0; }
+
+    .message { display: flex; min-width: 0; flex-direction: column; }
+    .post-meta { padding: 7px 10px; border-bottom: 1px dashed var(--border); color: var(--muted); font-size: 10px; }
+    .post-body { flex: 1; padding: 22px; font-size: 13px; }
+    h1 { margin: 0 0 16px; color: var(--accent); font: bold 22px Georgia, serif; }
+    .post-body p { max-width: 56ch; }
+
+    .link-buttons { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .link-buttons a {
+      padding: 5px 10px;
+      border: 2px outset var(--border);
+      color: var(--link);
+      background: var(--panel-alt);
+      font-size: 11px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .link-buttons a:active { border-style: inset; }
+
+    .signature {
+      margin-top: 28px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .online { margin-top: 8px; border: 1px solid var(--border-dark); background: var(--panel); }
+    .online p { margin: 0; padding: 12px; }
+    .dot { color: #65d46e; }
+
+    footer { padding: 18px 8px; color: var(--muted); font-size: 10px; text-align: center; }
+    a { color: var(--link); }
+
+    @media (max-width: 600px) {
+      .masthead { align-items: flex-start; flex-direction: column; gap: 16px; }
+      .account { text-align: left; }
+      .post { grid-template-columns: 1fr; }
+      .profile { border-right: 0; border-bottom: 1px solid var(--border); }
+      .avatar { width: 64px; height: 64px; font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="site">
+    <header class="masthead">
+      <div>
+        <div class="logo">Matthew's Homepage</div>
+        <div class="tagline">a tiny place on the internet</div>
+      </div>
+      <div class="account">
+        Welcome, Guest<br>
+        <button id="theme-toggle" type="button">Light theme</button>
+      </div>
+    </header>
+
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="https://github.com/vurden">GitHub</a>
+      <a href="https://a917593f.chesssite.pages.dev">Chess</a>
+    </nav>
+
+    <div class="crumbs">Matthew's Website » Index</div>
+
+    <main id="home" class="forum">
+      <div class="forum-title">Matthew's Website</div>
+      <div class="topic-title">Forum: General &nbsp;·&nbsp; Topic: Welcome to my homepage</div>
+      <article class="post">
+        <aside class="profile" aria-label="Author">
+          <strong>Matthew</strong>
+          <span class="rank">Site Administrator</span>
+          <div class="avatar" aria-hidden="true">M</div>
+          <dl>
+            <dt>Joined:</dt><dd>2026</dd>
+            <dt>Posts:</dt><dd>1</dd>
+            <dt>Status:</dt><dd><span class="dot">●</span> Online</dd>
+          </dl>
+        </aside>
+
+        <div class="message">
+          <div class="post-meta">Posted: Today, 9:42 pm &nbsp;·&nbsp; Subject: Hello</div>
+          <div class="post-body">
+            <h1>Welcome to my homepage!</h1>
+            <p>Hey, I'm Matthew. This is my small corner of the web.</p>
+            <p>You can find my code on GitHub or play the chess game I built.</p>
+            <div class="link-buttons">
+              <a href="https://github.com/vurden">View GitHub</a>
+              <a href="https://a917593f.chesssite.pages.dev">Play Chess</a>
+            </div>
+            <div class="signature">— Matthew<br>Thanks for stopping by.</div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <section class="online" aria-labelledby="online-title">
+      <div class="panel-title" id="online-title">Who is online</div>
+      <p><span class="dot">●</span> There is currently 1 guest browsing this website.</p>
+    </section>
+
+    <footer>Powered by plain HTML · Best viewed at any resolution</footer>
+  </div>
+
+  <script>
+    const root = document.documentElement;
+    const toggle = document.querySelector("#theme-toggle");
+    root.dataset.theme = localStorage.getItem("theme") || "dark";
+
+    function updateToggle() {
+      const dark = root.dataset.theme === "dark";
+      toggle.textContent = dark ? "Light theme" : "Dark theme";
+      toggle.setAttribute("aria-label", `Switch to ${dark ? "light" : "dark"} theme`);
+    }
+
+    toggle.addEventListener("click", () => {
+      root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", root.dataset.theme);
+      updateToggle();
+    });
+
+    updateToggle();
+  </script>
+</body>
 </html>
